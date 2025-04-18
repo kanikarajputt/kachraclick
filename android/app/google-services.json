@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1080953403916",
+    "project_id": "kachraclean-f8e37",
+    "storage_bucket": "kachraclean-f8e37.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1080953403916:android:82bba45a65b3ce95588c29",
+        "android_client_info": {
+          "package_name": "com.example.kachra_click"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8t0Prd2cMOY-ES4JSq44GT-hBEN1je1g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
