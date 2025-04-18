@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:kachra_click/screens/login_screen.dart';
 
 class WorkerHomeScreen extends StatelessWidget {
   const WorkerHomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // 🔹 Sample static data (as if fetched from Firebase)
     final Map<String, String> request = {
       'name': 'Riya Sharma',
       'location': 'Sector 22, Noida',
@@ -13,6 +13,20 @@ class WorkerHomeScreen extends StatelessWidget {
       'imageUrl': 'https://via.placeholder.com/300x200', // placeholder image
       'status': 'Pending'
     };
+
+    void _logout() {
+      // Show a logout confirmation message
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Logged out successfully!")),
+      );
+
+      // Navigate to the login screen or another screen after logout
+      // Replace LoginScreen() with the actual login screen widget you want to navigate to
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LoginScreen()), // Define LoginScreen in your app
+      );
+    }
 
     return Scaffold(
       appBar: AppBar(title: const Text("Worker Home")),
@@ -75,6 +89,19 @@ class WorkerHomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
+            ),
+
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _logout,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red, 
+                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
+              child: const Text("Logout"),
             ),
           ],
         ),

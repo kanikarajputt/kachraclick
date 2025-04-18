@@ -1,11 +1,12 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:kachra_click/screens/login_screen.dart';
 
 class UserHomeScreen extends StatefulWidget {
-  const UserHomeScreen({super.key});
+  final String userName;
+  const UserHomeScreen({super.key, required this.userName});
 
   @override
   State<UserHomeScreen> createState() => _UserHomeScreenState();
@@ -52,10 +53,6 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
 
     setState(() => _isLoading = true);
 
-    // TODO: Upload image to Firebase Storage
-    // TODO: Save record to Firestore with:
-    // imageRef (URL/path), user name/ID, location, _refController.text
-
     Future.delayed(const Duration(seconds: 2), () {
       setState(() {
         _isLoading = false;
@@ -70,6 +67,17 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
     });
   }
 
+  void _logout() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Logged out successfully!")),
+    );
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const LoginScreen()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,9 +89,8 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 10),
-              const Text('Welcome, User!', style: TextStyle(fontSize: 24)),
+              Text('Welcome, ${widget.userName}!', style: const TextStyle(fontSize: 24)),
               const SizedBox(height: 20),
-
               _selectedImage != null
                   ? Image.file(_selectedImage!, height: 200)
                   : Container(
@@ -95,27 +102,23 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                       ),
                       child: const Center(child: Text("No image selected")),
                     ),
-
               const SizedBox(height: 20),
               ElevatedButton.icon(
                 onPressed: _pickImage,
                 icon: const Icon(Icons.image),
                 label: const Text("Pick Image"),
               ),
-
               const SizedBox(height: 20),
               ElevatedButton.icon(
                 onPressed: _getLocation,
                 icon: const Icon(Icons.my_location),
                 label: const Text("Get Location"),
               ),
-
               if (_location != null)
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text("Location: $_location"),
                 ),
-
               const SizedBox(height: 20),
               TextField(
                 controller: _refController,
@@ -124,7 +127,6 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                   border: OutlineInputBorder(),
                 ),
               ),
-
               const SizedBox(height: 30),
               _isLoading
                   ? const CircularProgressIndicator()
@@ -139,6 +141,18 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                         ),
                       ),
                     ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: _logout,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+                child: const Text("Logout"),
+              ),
             ],
           ),
         ),

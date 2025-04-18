@@ -12,13 +12,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'My App',
+      title: 'KachraClick',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const LoginScreen(), // Set LoginScreen as the home screen
-      debugShowCheckedModeBanner: false, // Disable debug banner
+      home: const LoginScreen(), 
+      debugShowCheckedModeBanner: false, 
     );
   }
 }

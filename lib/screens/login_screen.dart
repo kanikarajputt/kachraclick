@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:kachra_click/screens/user/user_home_screen.dart';
 import 'package:kachra_click/screens/worker/worker_home_screen.dart';
 
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -24,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (role == 'user') {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (_) => const UserHomeScreen()),
+          MaterialPageRoute(builder: (_) => UserHomeScreen(userName: nameController.text)),
         );
       } else {
         Navigator.pushReplacement(
@@ -56,25 +55,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 30),
-
                 _buildTextField(
                   controller: nameController,
                   hint: 'Name',
                   icon: Icons.person,
                   validator: (val) => val!.isEmpty ? 'Enter your name' : null,
                 ),
-
                 const SizedBox(height: 16),
-
                 _buildTextField(
                   controller: emailController,
                   hint: 'Email',
                   icon: Icons.email,
                   validator: (val) => val!.isEmpty ? 'Enter email' : null,
                 ),
-
                 const SizedBox(height: 16),
-
                 _buildTextField(
                   controller: passController,
                   hint: 'Password',
@@ -83,9 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   validator: (val) =>
                       val!.length < 6 ? 'Min 6 characters' : null,
                 ),
-
                 const SizedBox(height: 20),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -102,9 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ],
                 ),
-
                 const SizedBox(height: 30),
-
                 ElevatedButton(
                   onPressed: _submit,
                   style: ElevatedButton.styleFrom(
